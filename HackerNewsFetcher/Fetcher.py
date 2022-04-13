@@ -173,6 +173,8 @@ class Fetcher(object):
             return
 
         with smtplib.SMTP(host=self.settings['SMTP']['EMAIL_HOST'], port=self.settings['SMTP']['EMAIL_PORT']) as smtp:
+            if self.settings['SMTP']['EMAIL_USE_TLS']:
+                smpt.starttls()
             if self.settings['SMTP']['EMAIL_HOST_USER'] is not None:
                 smtp.login(
                     user=self.settings['SMTP']['EMAIL_HOST_USER'],
